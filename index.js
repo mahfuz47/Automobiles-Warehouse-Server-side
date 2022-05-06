@@ -25,6 +25,7 @@ async function run() {
     await client.connect();
     const carsCollection = client.db("automobiles").collection("vehicles");
 
+    console.log("db connected");
     //-----------
     //GET USERS
     //----------
@@ -35,12 +36,12 @@ async function run() {
       res.send(users);
     });
 
-    // app.get("/cars/:id", async (req, res) => {
-    //   const id = req.params.id;
-    //   const query = { _id: ObjectId(id) };
-    //   const cars = await carsCollection.findOne(query);
-    //   res.send(cars);
-    // });
+    app.get("/cars/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const cars = await carsCollection.findOne(query);
+      res.send(cars);
+    });
   } finally {
   }
 }
