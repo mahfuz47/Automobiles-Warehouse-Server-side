@@ -18,6 +18,7 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
+console.log(uri);
 
 async function run() {
   try {
@@ -34,12 +35,12 @@ async function run() {
       res.send(users);
     });
 
-    app.get("/cars/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: ObjectId(id) };
-      const cars = await carsCollection.findOne(query);
-      res.send(cars);
-    });
+    // app.get("/cars/:id", async (req, res) => {
+    //   const id = req.params.id;
+    //   const query = { _id: ObjectId(id) };
+    //   const cars = await carsCollection.findOne(query);
+    //   res.send(cars);
+    // });
   } finally {
   }
 }
