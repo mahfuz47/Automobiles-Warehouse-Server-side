@@ -27,7 +27,7 @@ async function run() {
 
     console.log("db connected");
     //-----------
-    //GET USERS
+    //GET DATA
     //----------
     app.get("/cars", async (req, res) => {
       const query = {};
@@ -41,6 +41,26 @@ async function run() {
       const query = { _id: ObjectId(id) };
       const cars = await carsCollection.findOne(query);
       res.send(cars);
+    });
+    // ------------
+    // POST DATA
+    //-------------
+
+    // app.patch("/cars/:id", async (req, res) => {
+    //   const data = req.body;
+    //   const result = await carsCollection.insertOne(data);
+    //   res.send(result);
+    // });
+
+    //------------
+    //DELETE DATA
+    //------------
+
+    app.delete("/service/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await carsCollection.deleteOne(query);
+      res.send(result);
     });
   } finally {
   }
