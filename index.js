@@ -52,19 +52,12 @@ async function run() {
       res.send(result);
     });
 
-    app.put("/cars/:id", async (req, res) => {
-      const id = req.params.id;
-      const updateQuantity = req.body;
-      const filter = { _id: ObjectId(id) };
-      const options = { upsert: true };
-      const update = {
-        $set: {
-          updateQuantity,
-        },
-      };
-      const result = await dbs.updateOne(filter, update, options);
-      res.send(result);
-    });
+    // app.patch("/cars/:id", async (req, res) => {
+    //   const id = req.params.id;
+    //   const query = { _id: ObjectId(id) };
+    //   const result = await carsCollection.updateOne(query);
+    //   res.send(result);
+    // });
 
     //------------
     //DELETE DATA
