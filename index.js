@@ -66,6 +66,15 @@ async function run() {
 
     // Added Collection Api
 
+    // Get Data
+
+    app.get("/addItems", async (req, res) => {
+      const query = {};
+      const cursor = addedCollection.find(query);
+      const services = await cursor.toArray();
+      res.json(services);
+    });
+
     // Post data
 
     app.post("/addItems", async (req, res) => {
