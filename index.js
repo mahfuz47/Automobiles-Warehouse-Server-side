@@ -46,7 +46,11 @@ async function run() {
     // ------------
     // POST DATA
     //-------------
-
+    app.post("/cars", async (req, res) => {
+      const addedItem = req.body;
+      const result = await carsCollection.insertOne(addedItem);
+      res.send(result);
+    });
     // app.patch("/cars/:id", async (req, res) => {
     //   const data = req.params.id;
     //   const result = await carsCollection.insertOne(data);
@@ -80,6 +84,14 @@ async function run() {
     app.post("/addItems", async (req, res) => {
       const addedItem = req.body;
       const result = await addedCollection.insertOne(addedItem);
+      res.send(result);
+    });
+
+    // Delete added Data
+    app.delete("/addItems/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await addedCollection.deleteOne(query);
       res.send(result);
     });
   } finally {
