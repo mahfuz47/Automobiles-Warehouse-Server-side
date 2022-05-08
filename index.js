@@ -24,6 +24,7 @@ async function run() {
   try {
     await client.connect();
     const carsCollection = client.db("automobiles").collection("vehicles");
+    const addedCollection = client.db("automobiles").collection("addedItem");
 
     console.log("db connected");
     //-----------
@@ -47,7 +48,7 @@ async function run() {
     //-------------
 
     // app.patch("/cars/:id", async (req, res) => {
-    //   const data = req.body;
+    //   const data = req.params.id;
     //   const result = await carsCollection.insertOne(data);
     //   res.send(result);
     // });
@@ -60,6 +61,16 @@ async function run() {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await carsCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // Added Collection Api
+
+    // Post data
+
+    app.post("/addItems", async (req, res) => {
+      const addedItem = req.body;
+      const result = await addedCollection.insertOne(addedItem);
       res.send(result);
     });
   } finally {
